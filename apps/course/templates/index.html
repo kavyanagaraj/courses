@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Courses</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+  <h1>Add a new course</h1>
+  <form class="" action="/process" method="post">
+    {% csrf_token %}
+    <label for="name">Title:</label>
+    <input type="text" name = "course" id="name"> <br>
+    <label for="desc">Description:</label> <br>
+    <textarea name="description" rows="4" cols="40" id = "desc"></textarea>
+    <input type="submit" name="submit" value="Add">
+  </form>
+  <h2>Courses:</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Course Name</th>
+        <th>Description</th>
+        <th>Date Added</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%  for d in desc %}
+      <tr>
+        <td>{{d.course_id.course}}</td>
+        <td>{{d.description}}</td>
+        <td>{{d.course_id.created_at}}</td>
+        <td><a href="/courses/delete/{{d.id}}">remove</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </body>
+</html>
